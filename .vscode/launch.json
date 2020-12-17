@@ -8,6 +8,42 @@
       "name": "prov2",
       "request": "launch",
       "type": "dart"
-    }
+    },
+    {
+      "name": "dev",
+      "program": "lib/main.dart",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        // "--flavor"
+        // "dev"
+        "-t",
+        "lib/main.dart",
+      ],
+    },
+    {
+      "name": "staging",
+      "program": "lib/main_staging.dart",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        // "--flavor"
+        // "staging"
+        "-t",
+        "lib/main_staging.dart",
+      ],
+    },
+    {
+      "name": "prod",
+      "program": "lib/main_prod.dart",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        // "--flavor"
+        // "prod"
+        "-t",
+        "lib/main_prod.dart",
+      ],
+    },
   ]
 }
