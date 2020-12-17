@@ -63,9 +63,16 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('push the btn'),
-            Text(
-              '${counter.value}',
-              style: Theme.of(context).textTheme.headline4,
+            // Text(
+            //   '${counter.value}',
+            //   style: Theme.of(context).textTheme.headline4,
+            // ),
+            Consumer<Counter>(   /// [Consumer<TA>()]により[受け]渡しが成立
+              // builder: (context, counter, child) => Text(
+              builder: (_, counter, __) => Text(
+                '${counter.value}',
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),
           ],
         ),
