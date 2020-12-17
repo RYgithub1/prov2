@@ -15,9 +15,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
 
-      /// [ChangeNotifierProvider<TypeAnnotation>()]
-      home: ChangeNotifierProvider<Counter>(
-        create: (context) => Counter(),
+      /// [--- ChangeNotifierProvider<TypeAnnotation>() ---]
+      // home: ChangeNotifierProvider<Counter>(
+      //   create: (context) => Counter(),
+      /// [--- Change <TA> to <ValueNotifier> ---]
+      home: ChangeNotifierProvider<ValueNotifier<int>>(
+        create: (context) => ValueNotifier<int>(0),   // initial constructer: 0
         child: MyHomePage(title: 'Flavor v5'),
       ),
 
@@ -50,7 +53,11 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final flavor = Provider.of<Flavor>(context, listen: false);
-    final counter = Provider.of<Counter>(context, listen: false);  /// ["listen: false"必要だった]
+    /// [--- ChangeNotifierProvider<TypeAnnotation>() ---]
+    // final counter = Provider.of<Counter>(context, listen: false);  /// ["listen: false"必要だった]
+    /// [--- Change <TA> to <ValueNotifier> ---]
+    final counter = Provider.of<ValueNotifier<int>>(context, listen: false);  /// ["listen: false"必要だった]
+
     return Scaffold(
       appBar: AppBar(
         // title: Text(flavor.toString()),
@@ -67,9 +74,12 @@ class MyHomePage extends StatelessWidget {
             //   '${counter.value}',
             //   style: Theme.of(context).textTheme.headline4,
             // ),
-            Consumer<Counter>(   /// [Consumer<TA>()]により[受け]渡しが成立
+            /// [--- ChangeNotifierProvider<TypeAnnotation>() ---]
+            // Consumer<Counter>(   /// [Consumer<TA>()]により[受け]渡しが成立
+            /// [--- Change <TA> to <ValueNotifier> ---]
+            Consumer<ValueNotifier<int>>(
               // builder: (context, counter, child) => Text(
-              builder: (_, counter, __) => Text(
+              builder: (_, counter, __) => Text(    /// [unusing params -> _]
                 '${counter.value}',
                 style: Theme.of(context).textTheme.headline4,
               ),
@@ -78,7 +88,10 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: counter.increment,
+        /// [--- ChangeNotifierProvider<TypeAnnotation>() ---]
+        // onPressed: counter.increment,
+        /// [--- Change <TA> to <ValueNotifier> ---]
+        onPressed: () => counter.value++,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
