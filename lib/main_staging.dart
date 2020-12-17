@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(Provider<Flavor>.value(
-    value: Flavor.dev,   /// [from enum]
+    value: Flavor.staging,   /// [from enum]
     child: MyApp(),
   ));
 }
